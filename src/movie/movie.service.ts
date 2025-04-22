@@ -12,9 +12,9 @@ export class MovieService {
 
   async getProducersInterval(): Promise<IntervalResponse> {
     this.logger.log("Iniciando recuperação de intervalo de vencedores...");
-    const winners = await this.loadDataInDatabase();
-    const producerWinsMap = this.mapWinnerProducers(winners);
-    const intervals = this.mapIntervals(producerWinsMap);
+    const winners = await this.loadData();
+    const producersMap = this.mapProducers(winners);
+    const intervals = this.mapIntervals(producersMap);
 
     const minInterval = intervals.reduce((min, item) => item.interval < min ? item.interval : min, 500);
     const maxInterval = intervals.reduce((max, item) => item.interval > max ? item.interval : max, 0);
@@ -24,11 +24,11 @@ export class MovieService {
       max: intervals.filter((i) => i.interval === maxInterval),
     };
 
-    this.logger.log(`Processo concluído, min: ${minInterval}, max: ${maxInterval}`);
+    this.logger.log("Processo concluído.");
     return result;
   }
 
-  private async loadDataInDatabase(): Promise<Movie[]>{
+  private async loadData(): Promise<Movie[]>{
     try{
       this.logger.log("Buscando filmes salvos em memória...");
       const movies = await this.movieRepository.findAllWinners();
@@ -40,36 +40,39 @@ export class MovieService {
     }
   }
 
-  private mapWinnerProducers(winners: Movie[]): Map<string, number[]>{
-    const producerWinsMap = new Map<string, number[]>();
+  private mapProducers(winners: Movie[]): Map<string, number[]>{
+    const producersMap = new Map<string, number[]>();
     for (const movie of winners) {
       const producers = movie.producers.split(/,| and /).map((p) => p.trim());
       for (const producer of producers) {
-        if (!producerWinsMap.has(producer))
-          producerWinsMap.set(producer, []);
-        const pwm = producerWinsMap.get(producer);
-        if(pwm) 
-          pwm.push(movie.year);
+        const list = producersMap.get(producer) ?? [];
+        list.push(movie.year);
+        producersMap.set(producer, list);
       }
     }
-    return producerWinsMap;
+    return producersMap;
   }
 
-  private mapIntervals(producerWinsMap: Map<string, number[]>): IntervalResult[] {
+  private mapIntervals(producersMap: Map<string, number[]>): IntervalResult[] {
     const intervals: IntervalResult[] = [];
-    for (const [producer, years] of producerWinsMap.entries()) {
+  
+    for (const [producer, years] of Array.from(producersMap)) {
       if (years.length < 2) continue;
-
-      const sortedYears = years.sort((a, b) => a - b);
-      for (let i = 1; i < sortedYears.length; i++) {
+  
+      const orderedYears = [...years].sort((a, b) => a - b);
+  
+      for (let i = orderedYears.length - 1; i > 0; i--) {
+        const current = orderedYears[i];
+        const previous = orderedYears[i - 1];
         intervals.push({
           producer,
-          interval: sortedYears[i] - sortedYears[i - 1],
-          previousWin: sortedYears[i - 1],
-          followingWin: sortedYears[i],
+          interval: current - previous,
+          previousWin: previous,
+          followingWin: current,
         });
       }
     }
+  
     return intervals;
   }
 

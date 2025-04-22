@@ -17,7 +17,7 @@ export class DataLoaderService implements OnApplicationBootstrap {
     this.logger.log("Iniciando carregamento de dados em memória...")
     const movies: Movie[] = await this.loadDataFromCSV();
     await this.saveMoviesInDatabase(movies);
-    this.logger.log("Dados salvos em memória com sucesso.")
+    this.logger.log(`Dados salvos em memória com sucesso. Total: ${movies.length} filmes`);
   }
 
   private async loadDataFromCSV(): Promise<Movie[]> {

@@ -4,15 +4,15 @@ import { IntervalResponse } from './movie/interface/interval-response.interface'
 
 @Controller("producers")
 export class AppController {
-  constructor(private readonly appService: MovieService) {}
+  constructor(private readonly movieService: MovieService) {}
 
   @Get("/intervals")
   getProducersInterval(): Promise<IntervalResponse> {
-    return this.appService.getProducersInterval();
+    return this.movieService.getProducersInterval();
   }
 
   @Get("/")
   getAllMovies(): Promise<any> {
-    return this.appService.getAllMovies();
+    return this.movieService.getAllMovies();
   }
 }
