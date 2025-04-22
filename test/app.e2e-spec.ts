@@ -36,7 +36,7 @@ describe('AppController (e2e)', () => {
     };
 
     const response = await request(app.getHttpServer())
-      .get('/movies/intervals')
+      .get('/producers/intervals')
       .expect(200);
 
     expect(response.body).toEqual(expected);
