@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { MovieService } from './movie/movie.service';
 import { IntervalResponse } from './movie/interface/interval-response.interface';
 
-@Controller("movies")
+@Controller("producers")
 export class AppController {
   constructor(private readonly appService: MovieService) {}
 

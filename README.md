@@ -50,7 +50,7 @@ npm run start
 ```
 A API estará disponível em:
 ```bash
-GET http://localhost:3000/movies/intervals
+GET http://localhost:3000/producers/intervals
 ```
 ## 🧪 Executando os Testes de Integração
 ```bash
@@ -64,7 +64,7 @@ Esse comando irá:
 
 - Realizar chamadas reais à API
 
-- Verificar se o endpoint /movies/intervals retorna os dados corretos, com base nos produtores vencedores
+- Verificar se o endpoint /producers/intervals retorna os dados corretos, com base nos produtores vencedores
 
 ## ⚠️ Pontos de Atenção
 - Apenas filmes com winner = yes são considerados.
@@ -73,7 +73,7 @@ Esse comando irá:
 
 - O banco de dados é em memória, portanto os dados são recarregados a cada execução.
 
-- Os testes de integração não devem ser executados com arquivos CSV diferentes, pois a verificação é feita contra valores fixos.
+- Os testes de integração não devem ser executados com arquivos CSV diferentes, pois, a verificação é feita contra valores fixos.
 
 - O CSV deve manter o mesmo padrão do arquivo inicial fornecido com a distribuição de colunas iguais e separado por ";".
 ## License

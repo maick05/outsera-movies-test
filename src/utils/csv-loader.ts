@@ -4,7 +4,7 @@ import * as csvParser from 'csv-parser';
 import { Movie } from 'src/movie/movie.entity';
 
 export async function loadMoviesFromCsv(): Promise<Movie[]> {
-  const results: Movie[] = [];
+  const items: Movie[] = [];
   const filePath = path.resolve(__dirname, '../../data/movielist.csv');
 
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export async function loadMoviesFromCsv(): Promise<Movie[]> {
       .on('data', (row) => {
         if (!row.year || !row.title || !row.producers) return;
 
-        results.push({
+        items.push({
           year: parseInt(row.year, 10),
           title: row.title,
           studios: row.studios,
@@ -21,7 +21,7 @@ export async function loadMoviesFromCsv(): Promise<Movie[]> {
           winner: row.winner?.trim().toLowerCase() === 'yes',
         } as Movie);
       })
-      .on('end', () => resolve(results))
+      .on('end', () => resolve(items))
       .on('error', (error) => reject(error));
   });
 }
