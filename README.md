@@ -76,6 +76,8 @@ Esse comando irá:
 - Os testes de integração não devem ser executados com arquivos CSV diferentes, pois, a verificação é feita contra valores fixos.
 
 - O CSV deve manter o mesmo padrão do arquivo inicial fornecido com a distribuição de colunas iguais e separado por ";".
+
+- Os intervalos considerados serão somente dos produtores que tiveram ao menos duas vitórias, não sendo considerados produtores que obtiveram nenhuma ou somente uma vitória.
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

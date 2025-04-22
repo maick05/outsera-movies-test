@@ -15,7 +15,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/movies/intervals (GET)', async () => {
+  it('/producers/intervals (GET)', async () => {
     const expected = {
       min: [
         {
