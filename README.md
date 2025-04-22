@@ -78,8 +78,9 @@ Esse comando irá:
 - O CSV deve manter o mesmo padrão do arquivo inicial fornecido com a distribuição de colunas iguais e separado por ";".
 
 - Os intervalos considerados serão somente dos produtores que tiveram ao menos duas vitórias, não sendo considerados produtores que obtiveram nenhuma ou somente uma vitória.
+
+- Após mudar o arquivo CSV, deve-se realizar novamente o start da aplicação para realizar o load de dados novos.
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
 
