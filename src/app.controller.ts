@@ -10,9 +10,4 @@ export class AppController {
   getProducersInterval(): Promise<IntervalResponse> {
     return this.movieService.getProducersInterval();
   }
-
-  @Get("/")
-  getAllMovies(): Promise<any> {
-    return this.movieService.getAllMovies();
-  }
 }

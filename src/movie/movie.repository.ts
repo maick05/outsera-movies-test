@@ -13,8 +13,4 @@ export class MovieRepository {
   async findAllWinners(): Promise<Movie[]> {
     return this.repository.find({ where: { winner: true } });
   }
-
-  async findAll(): Promise<Movie[]> {
-    return this.repository.find({});
-  }
 }

@@ -74,8 +74,4 @@ export class MovieService {
   
     return intervals;
   }
-
-  async getAllMovies() {
-    return this.movieRepository.findAll();
-  }
 }
