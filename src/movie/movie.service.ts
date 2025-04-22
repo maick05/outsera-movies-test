@@ -15,7 +15,7 @@ export class MovieService {
     const producersMap = this.mapProducers(winners);
     const intervals = this.mapIntervals(producersMap);
 
-    const minInterval = intervals.reduce((min, item) => item.interval < min ? item.interval : min, 500);
+    const minInterval = intervals.reduce((min, item) => item.interval < min ? item.interval : min, Infinity);
     const maxInterval = intervals.reduce((max, item) => item.interval > max ? item.interval : max, 0);
 
     const result = {
