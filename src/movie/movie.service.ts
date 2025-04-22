@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { MovieRepository } from './movie.repository';
-import { IntervalResponse } from './interface/interval-response.interface';
-import { IntervalResult } from './interface/interval-result.interface';
+import { IntervalResponse, IntervalResult } from './interface/interval-response.interface';
 import { Movie } from './movie.entity';
 
 @Injectable()
